@@ -1,0 +1,90 @@
+{
+  "Name": "openurlsfromCSV",
+  "CreationDate": "2026-3-23",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!csvReadLineNumber",
+      "Description": "Start at row 1 (set to 2 if you have a header row)"
+    },
+    {
+      "Command": "csvRead",
+      "Target": "urls.csv",
+      "Value": "",
+      "Description": "Read initial row to set !csvReadStatus and !COL1"
+    },
+    {
+      "Command": "while",
+      "Target": "${!csvReadStatus} == \"OK\"",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Opening CSV line ${!csvReadLineNumber}: ${!COL1}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${!COL1}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "30000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "This is where you put your code for each page.",
+      "Value": "",
+      "Description": ""
+    }, 
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number(${!csvReadLineNumber}) + 1;",
+      "Value": "!csvReadLineNumber",
+      "Description": "Advance to next CSV row"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": "Ignore the read error when we go past EOF"
+    },
+    {
+      "Command": "csvRead",
+      "Target": "urls.csv",
+      "Value": "",
+      "Description": "Read next row"
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Done. Reached end of urls.csv",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
