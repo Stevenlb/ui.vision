@@ -1,6 +1,6 @@
 {
-  "Name": "openurlsfromCSV",
-  "CreationDate": "2026-3-23",
+  "Name": "OpenUrlsfromCSV",
+  "CreationDate": "2026-4-9",
   "Commands": [
     {
       "Command": "store",
@@ -33,9 +33,21 @@
       "Description": ""
     },
     {
+      "Command": "comment",
+      "Target": "Use Open below to open in the same tab, use \"selectWindow\" if you need these in new tabs",
+      "Value": "",
+      "Description": ""
+    },
+    {
       "Command": "open",
       "Target": "${!COL1}",
       "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "selectWindow // tab=open",
+      "Value": "${!COL1}",
       "Description": ""
     },
     {
@@ -49,7 +61,7 @@
       "Target": "This is where you put your code for each page.",
       "Value": "",
       "Description": ""
-    }, 
+    },
     {
       "Command": "executeScript_Sandbox",
       "Target": "return Number(${!csvReadLineNumber}) + 1;",
