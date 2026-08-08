@@ -1,0 +1,258 @@
+{
+  "Name": "Glassdoor Scraper",
+  "CreationDate": "2026-8-8",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.glassdoor.com/Job/jobs.htm?locId=1&locT=N&sc.locationSeoString=United+States&sc.occupationParam=%28M365+OR+%22Microsoft+365%22+OR+%22Microsoft+Teams%22+OR+SharePoint%29&remoteWorkType=1&maxSalary=900000&minSalary=130000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return 1;",
+      "Value": "loopCounter",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var btn = document.querySelector('button[data-test=\"load-more\"]'); return (btn && btn.offsetParent !== null) ? true : false;",
+      "Value": "buttonVisible",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${buttonVisible} == true",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var popup = document.querySelector('button[class*=\"modal_CloseButton\"], button[class*=\"CloseButton\"]'); if(popup) popup.click(); return true;",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-test='load-more']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2500",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var btn = document.querySelector('button[data-test=\"load-more\"]'); return (btn && btn.offsetParent !== null) ? true : false;",
+      "Value": "buttonVisible",
+      "Description": ""
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelectorAll(\"li[class*='JobsList_jobListItem']\").length;",
+      "Value": "totalJobs",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${loopCounter} <= Number(${totalJobs})",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var popup = document.querySelector('button[class*=\"modal_CloseButton\"], button[class*=\"CloseButton\"]'); if(popup) popup.click(); return true;",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//li[${loopCounter}]/div/div/div/div/a[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1500",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-test='show-more-cta']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "500",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") a[class*='JobCard_jobTitle']\"); return el ? el.innerText.trim() : '';",
+      "Value": "jobTitle",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "jobTitle is ${jobTitle}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el = document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") div[class*='JobCard_jobCardContent'] span\"); return el ? el.innerText.trim() : '';",
+      "Value": "company",
+      "Description": "Generic span extraction for Company Name"
+    },
+    {
+      "Command": "echo",
+      "Target": "company is ${company}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var item = document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\")\"); if (!item) return ''; var ratingEl = item.querySelector(\"div[role='meter']\"); if (ratingEl) { return ratingEl.getAttribute('aria-label') || ratingEl.innerText.trim(); } var altRating = item.querySelector(\"svg path\"); if (altRating && altRating.closest('div')) { return altRating.closest('div').innerText.trim(); } return '';",
+      "Value": "companyRating",
+      "Description": "Fallback logic for Company Rating extraction"
+    },
+    {
+      "Command": "echo",
+      "Target": "companyRating is ${companyRating}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") div[class*='JobCard_location']\"); return el ? el.innerText.trim() : '';",
+      "Value": "location",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "location is ${location}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") div[class*='JobCard_salaryEstimate']\"); return el ? el.innerText.trim() : '';",
+      "Value": "pay",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") a[class*='JobCard_jobTitle']\"); return el ? el.href : '';",
+      "Value": "url",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") div[class*='JobCard_easyApplyTag']\"); return el ? 'Easy Apply' : '';",
+      "Value": "quickApply",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"li[class*='JobsList_jobListItem']:nth-child(\"+${loopCounter}+\") div[class*='JobCard_listingAge']\"); return el ? el.innerText.trim() : '';",
+      "Value": "postAge",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "var el=document.querySelector(\"div[class*='JobDetails_jobDescription']\"); return el ? el.innerText.trim() : '';",
+      "Value": "jobDescription",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobTitle}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${companyRating}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${location}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${url}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${quickApply}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${postAge}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDescription}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-GlassDoor.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number(${loopCounter}) + 1;",
+      "Value": "loopCounter",
+      "Description": ""
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
