@@ -1,0 +1,2628 @@
+{
+  "Name": "JobScraper-LinkedIn",
+  "CreationDate": "2026-8-8",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.linkedin.com/jobs/search-results/?currentJobId=4425534158&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%22%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=LE13jaNpHSx8WYe7sEaUJw%3D%3D&f_SAL=f_SA_id_225001%3A272001",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "label",
+      "Target": "Start",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "open // https://www.linkedin.com/jobs/search-results/?currentJobId=4425534158&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%22%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=LE13jaNpHSx8WYe7sEaUJw%3D%3D&f_SAL=f_SA_id_225001%3A272001",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[1]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[2]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[3]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[4]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[5]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[6]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[7]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[8]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[9]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[10]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[11]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[12]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[13]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[14]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[15]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[16]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[17]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[18]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[19]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[20]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[21]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[22]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[23]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[24]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[25]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div/p/a[1]@href",
+      "Value": "URL",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//button/span/strong",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='expandable-text-button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]",
+      "Value": "Body",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${Pay}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Body}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//div[2]/div/button[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//div[3]/div/button/span",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "false",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@data-testid='pagination-controls-next-button-visible']",
+      "Value": "",
+      "Description": "Clicks the Next button avoiding XPath"
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "5000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "Start",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
