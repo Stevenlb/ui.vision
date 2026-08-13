@@ -75,12 +75,6 @@
       "Description": ""
     },
     {
-      "Command": "onError",
-      "Target": "#goto",
-      "Value": "scrapestart",
-      "Description": ""
-    },
-    {
       "Command": "store",
       "Target": "0",
       "Value": "loopCounter",
@@ -90,6 +84,12 @@
       "Command": "label",
       "Target": "scrapestart",
       "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "onError",
+      "Target": "#goto",
+      "Value": "scrapestart",
       "Description": ""
     },
     {
@@ -184,13 +184,19 @@
     },
     {
       "Command": "echo",
-      "Target": "Job ${loopCounter} is a ${jobTitle} at {company}",
+      "Target": "Job ${loopCounter} is a ${jobTitle} at ${company}",
       "Value": "",
       "Description": ""
     },
     {
       "Command": "store",
       "Target": "${jobTitle}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${company}",
       "Value": "!csvLine",
       "Description": ""
     },
@@ -219,8 +225,8 @@
       "Description": ""
     },
     {
-      "Command": "echo",
-      "Target": "does ${lastURL} == ${url} ?",
+      "Command": "comment",
+      "Target": "echo // does ${lastURL} == ${url} ?",
       "Value": "",
       "Description": ""
     },
