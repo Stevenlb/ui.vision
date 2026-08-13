@@ -1,5 +1,5 @@
 {
-  "Name": "JobScraper-LinkedIn",
+  "Name": "JobScraper-LinkedIn 02",
   "CreationDate": "2026-8-12",
   "Commands": [
     {
@@ -27,16 +27,22 @@
       "Description": "Initialize the job list index counter (i) to 1"
     },
     {
-      "Command": "while_v2",
-      "Target": "${i} <= 30",
+      "Command": "label",
+      "Target": "next job",
       "Value": "",
-      "Description": "Start loop to process up to 30 job cards on the current page"
+      "Description": ""
     },
     {
       "Command": "onError",
       "Target": "#goto",
-      "Value": "nextpage",
+      "Value": "next job",
       "Description": "If clicking a job card fails (list exhausted), jump to the pagination routine"
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${i} <= 30",
+      "Value": "",
+      "Description": "Start loop to process up to 30 job cards on the current page"
     },
     {
       "Command": "click",
@@ -73,12 +79,6 @@
       "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
       "Value": "URL",
       "Description": "Extract the direct URL to the job posting and store it as 'URL'"
-    },
-    {
-      "Command": "storeText",
-      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
-      "Value": "Company",
-      "Description": "Extract the company name from the details pane and store it as 'Company'"
     },
     {
       "Command": "store",
@@ -121,12 +121,6 @@
       "Target": "${Title}",
       "Value": "!csvLine",
       "Description": "Append the Job Title to the current CSV row"
-    },
-    {
-      "Command": "store",
-      "Target": "${Company}",
-      "Value": "!csvLine",
-      "Description": "Append the Company Name to the current CSV row"
     },
     {
       "Command": "store",
