@@ -1,216 +1,216 @@
 {
-  "Name": "JobScraper-LinkedIn 02",
+  "Name": "JobScraper-LinkedIn",
   "CreationDate": "2026-8-12",
   "Commands": [
     {
       "Command": "store",
       "Target": "true",
       "Value": "!errorignore",
-      "Description": ""
+      "Description": "Enable error ignoring so the macro continues even if elements are missing"
     },
     {
       "Command": "selectWindow",
       "Target": "tab=open",
-      "Value": "https://www.linkedin.com/jobs/search-results/?currentJobId=4453609705&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%22%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=i6aNvymzphEOJZrGDowFdw%3D%3D&f_TPR=r86400&f_SAL=f_SA_id_225001%3A272001",
-      "Description": ""
+      "Value": "https://www.linkedin.com/jobs/search-results/?currentJobId=4453609705&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=i6aNvymzphEOJZrGDowFdw%3D%3D&f_TPR=r86400&f_SAL=f_SA_id_225001%3A272001",
+      "Description": "Open a new tab with the target LinkedIn job search URL"
     },
     {
       "Command": "label",
       "Target": "Start",
       "Value": "",
-      "Description": ""
+      "Description": "Mark the start of the page-processing routine"
     },
     {
       "Command": "executeScript_Sandbox",
       "Target": "return 1;",
       "Value": "i",
-      "Description": "Initialize loop counter for jobs on the page"
+      "Description": "Initialize the job list index counter (i) to 1"
     },
     {
       "Command": "while_v2",
       "Target": "${i} <= 30",
       "Value": "",
-      "Description": "Loop through up to 30 job cards per page"
+      "Description": "Start loop to process up to 30 job cards on the current page"
     },
     {
       "Command": "onError",
       "Target": "#goto",
       "Value": "nextpage",
-      "Description": "If clicking the job card fails (end of list), jump to next page"
+      "Description": "If clicking a job card fails (list exhausted), jump to the pagination routine"
     },
     {
       "Command": "click",
       "Target": "xpath=//div[${i}]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
       "Value": "",
-      "Description": "Click the job card dynamically based on counter i"
+      "Description": "Click the job card in the list using the dynamic index (i)"
     },
     {
       "Command": "waitForElementVisible",
       "Target": "css=button[data-testid=expandable-text-button]",
       "Value": "",
-      "Description": ""
+      "Description": "Wait for the 'See more' button to become visible on the screen"
     },
     {
       "Command": "waitForElementPresent",
       "Target": "css=button[data-testid=expandable-text-button]",
       "Value": "",
-      "Description": ""
+      "Description": "Wait for the 'See more' button to be present in the DOM"
     },
     {
       "Command": "click",
       "Target": "css=button[data-testid=expandable-text-button]",
       "Value": "",
-      "Description": ""
+      "Description": "Click 'See more' to expand the full job description text"
     },
     {
       "Command": "storeText",
       "Target": "/html/head/title[1]",
       "Value": "Title",
-      "Description": "Reads the selected job hyperlink from the detail area"
+      "Description": "Extract the page title and store it as 'Title'"
     },
     {
       "Command": "storeAttribute",
       "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
       "Value": "URL",
-      "Description": "Reads the selected job hyperlink from the detail area"
+      "Description": "Extract the direct URL to the job posting and store it as 'URL'"
     },
     {
       "Command": "storeText",
       "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
       "Value": "Company",
-      "Description": "Fixed the URL targeting bug from the original macro"
+      "Description": "Extract the company name from the details pane and store it as 'Company'"
     },
     {
       "Command": "store",
       "Target": "1",
       "Value": "!timeout_wait",
-      "Description": ""
+      "Description": "Reduce implicit wait timeout to 1 second for optional elements (like Pay)"
     },
     {
       "Command": "store",
       "Target": "true",
       "Value": "!errorignore",
-      "Description": ""
+      "Description": "Ensure error ignoring is active for optional elements"
     },
     {
       "Command": "storeText",
       "Target": "xpath=//div[2]/div/a/span",
       "Value": "Pay",
-      "Description": ""
+      "Description": "Attempt to extract salary/pay information if available"
     },
     {
       "Command": "storeText",
       "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
       "Value": "jobDetails",
-      "Description": "Scrape the full visible job details."
+      "Description": "Extract the full expanded job description text"
     },
     {
       "Command": "store",
       "Target": "30",
       "Value": "!timeout_wait",
-      "Description": ""
+      "Description": "Restore implicit wait timeout back to the default 30 seconds"
     },
     {
       "Command": "echo",
       "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
       "Value": "",
-      "Description": ""
+      "Description": "Print the extracted data to the macro log for debugging"
     },
     {
       "Command": "store",
       "Target": "${Title}",
       "Value": "!csvLine",
-      "Description": ""
+      "Description": "Append the Job Title to the current CSV row"
     },
     {
       "Command": "store",
       "Target": "${Company}",
       "Value": "!csvLine",
-      "Description": ""
+      "Description": "Append the Company Name to the current CSV row"
     },
     {
       "Command": "store",
       "Target": "${Pay}",
       "Value": "!csvLine",
-      "Description": ""
+      "Description": "Append the Pay information to the current CSV row"
     },
     {
       "Command": "store",
       "Target": "${URL}",
       "Value": "!csvLine",
-      "Description": ""
+      "Description": "Append the Job URL to the current CSV row"
     },
     {
       "Command": "store",
       "Target": "${jobDetails}",
       "Value": "!csvLine",
-      "Description": "Prepare the enriched CSV row."
+      "Description": "Append the full Job Details to the current CSV row"
     },
     {
       "Command": "csvSave",
       "Target": "Jobs-LinkedIn",
       "Value": "",
-      "Description": ""
+      "Description": "Save the current CSV row to 'Jobs-LinkedIn.csv' and clear the buffer"
     },
     {
       "Command": "executeScript_Sandbox",
       "Target": "return Number(${i}) + 1;",
       "Value": "i",
-      "Description": "Increment loop counter"
+      "Description": "Increment the job list index counter by 1"
     },
     {
       "Command": "end",
       "Target": "",
       "Value": "",
-      "Description": ""
+      "Description": "End of the job card processing loop"
     },
     {
       "Command": "label",
       "Target": "nextpage",
       "Value": "",
-      "Description": ""
+      "Description": "Mark the start of the pagination routine"
     },
     {
       "Command": "store",
       "Target": "false",
       "Value": "!errorignore",
-      "Description": ""
+      "Description": "Disable error ignoring so the macro halts if there is no Next button"
     },
     {
       "Command": "onError",
       "Target": "#goto",
       "Value": "end",
-      "Description": "If next page button doesn't exist, end the macro"
+      "Description": "If clicking the Next button fails (last page), jump to the end of the macro"
     },
     {
       "Command": "click",
       "Target": "xpath=//button[@data-testid='pagination-controls-next-button-visible']",
       "Value": "",
-      "Description": "Clicks the Next button"
+      "Description": "Click the pagination 'Next' button"
     },
     {
       "Command": "store",
       "Target": "true",
       "Value": "!errorignore",
-      "Description": ""
+      "Description": "Re-enable error ignoring for the next page's loop"
     },
     {
       "Command": "pause",
       "Target": "3000",
       "Value": "",
-      "Description": "Wait for next page to load"
+      "Description": "Wait 3 seconds for the new page of results to load"
     },
     {
       "Command": "gotoLabel",
       "Target": "Start",
       "Value": "",
-      "Description": "Go back to start of page scraping"
+      "Description": "Jump back to the 'Start' label to process the new page"
     },
     {
       "Command": "label",
       "Target": "end",
       "Value": "",
-      "Description": ""
+      "Description": "Mark the successful termination point of the macro"
     }
   ]
 }
