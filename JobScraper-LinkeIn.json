@@ -1,210 +1,2772 @@
 {
-  "Name": "JobScraper-LinkedIn 02",
+  "Name": "JobScraper-LinkedIn",
   "CreationDate": "2026-8-12",
   "Commands": [
     {
       "Command": "store",
-      "Target": "true",
-      "Value": "!errorignore",
-      "Description": "Enable error ignoring so the macro continues even if elements are missing"
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
     },
     {
       "Command": "selectWindow",
       "Target": "tab=open",
-      "Value": "https://www.linkedin.com/jobs/search-results/?currentJobId=4453609705&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=i6aNvymzphEOJZrGDowFdw%3D%3D&f_TPR=r86400&f_SAL=f_SA_id_225001%3A272001",
-      "Description": "Open a new tab with the target LinkedIn job search URL"
+      "Value": "https://www.linkedin.com/jobs/search-results/?currentJobId=4433400263&eBP=NON_CHARGEABLE_CHANNEL&refId=eivpG1qrjHMFlNAyCRwbVA%3D%3D&trackingId=OzNXnzmzaNurWjjGPtc3aA%3D%3D&keywords=%28%22M365%22%20OR%20%22Microsoft%20365%22%20OR%20%22Microsoft%20Teams%22%20OR%20%22SharePoint%22%29&origin=JOB_SEARCH_PAGE_JOB_FILTER&referralSearchId=4UuIv52wma8pp9SrJsevYw%3D%3D&f_TPR=r604800&f_AL=true&f_SAL=f_SA_id_225001%3A272001",
+      "Description": ""
     },
     {
       "Command": "label",
       "Target": "Start",
       "Value": "",
-      "Description": "Mark the start of the page-processing routine"
+      "Description": ""
     },
     {
-      "Command": "executeScript_Sandbox",
-      "Target": "return 1;",
-      "Value": "i",
-      "Description": "Initialize the job list index counter (i) to 1"
-    },
-    {
-      "Command": "label",
-      "Target": "next job",
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
       "Value": "",
       "Description": ""
     },
     {
-      "Command": "onError",
-      "Target": "#goto",
-      "Value": "next job",
-      "Description": "If clicking a job card fails (list exhausted), jump to the pagination routine"
-    },
-    {
-      "Command": "while_v2",
-      "Target": "${i} <= 30",
-      "Value": "",
-      "Description": "Start loop to process up to 30 job cards on the current page"
-    },
-    {
       "Command": "click",
-      "Target": "xpath=//div[${i}]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Target": "xpath=//div[1]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
       "Value": "",
-      "Description": "Click the job card in the list using the dynamic index (i)"
-    },
-    {
-      "Command": "waitForElementVisible",
-      "Target": "css=button[data-testid=expandable-text-button]",
-      "Value": "",
-      "Description": "Wait for the 'See more' button to become visible on the screen"
-    },
-    {
-      "Command": "waitForElementPresent",
-      "Target": "css=button[data-testid=expandable-text-button]",
-      "Value": "",
-      "Description": "Wait for the 'See more' button to be present in the DOM"
+      "Description": ""
     },
     {
       "Command": "click",
       "Target": "css=button[data-testid=expandable-text-button]",
       "Value": "",
-      "Description": "Click 'See more' to expand the full job description text"
+      "Description": ""
     },
     {
       "Command": "storeText",
-      "Target": "/html/head/title[1]",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
       "Value": "Title",
-      "Description": "Extract the page title and store it as 'Title'"
+      "Description": ""
     },
     {
       "Command": "storeAttribute",
       "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
       "Value": "URL",
-      "Description": "Extract the direct URL to the job posting and store it as 'URL'"
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
     },
     {
       "Command": "store",
       "Target": "1",
       "Value": "!timeout_wait",
-      "Description": "Reduce implicit wait timeout to 1 second for optional elements (like Pay)"
+      "Description": ""
     },
     {
       "Command": "store",
-      "Target": "true",
-      "Value": "!errorignore",
-      "Description": "Ensure error ignoring is active for optional elements"
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
     },
     {
       "Command": "storeText",
       "Target": "xpath=//div[2]/div/a/span",
       "Value": "Pay",
-      "Description": "Attempt to extract salary/pay information if available"
+      "Description": ""
     },
     {
       "Command": "storeText",
       "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
       "Value": "jobDetails",
-      "Description": "Extract the full expanded job description text"
+      "Description": "Scrape the full visible job details."
     },
     {
       "Command": "store",
       "Target": "30",
       "Value": "!timeout_wait",
-      "Description": "Restore implicit wait timeout back to the default 30 seconds"
+      "Description": ""
     },
     {
       "Command": "echo",
       "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
       "Value": "",
-      "Description": "Print the extracted data to the macro log for debugging"
+      "Description": ""
     },
     {
       "Command": "store",
       "Target": "${Title}",
       "Value": "!csvLine",
-      "Description": "Append the Job Title to the current CSV row"
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
     },
     {
       "Command": "store",
       "Target": "${Pay}",
       "Value": "!csvLine",
-      "Description": "Append the Pay information to the current CSV row"
+      "Description": ""
     },
     {
       "Command": "store",
       "Target": "${URL}",
       "Value": "!csvLine",
-      "Description": "Append the Job URL to the current CSV row"
+      "Description": ""
     },
     {
       "Command": "store",
       "Target": "${jobDetails}",
       "Value": "!csvLine",
-      "Description": "Append the full Job Details to the current CSV row"
+      "Description": "Prepare the enriched CSV row."
     },
     {
       "Command": "csvSave",
-      "Target": "Jobs-LinkedIn",
+      "Target": "Jobs-LinkedIn-URLs",
       "Value": "",
-      "Description": "Save the current CSV row to 'Jobs-LinkedIn.csv' and clear the buffer"
+      "Description": ""
     },
     {
-      "Command": "executeScript_Sandbox",
-      "Target": "return Number(${i}) + 1;",
-      "Value": "i",
-      "Description": "Increment the job list index counter by 1"
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
     },
     {
-      "Command": "end",
-      "Target": "",
+      "Command": "click",
+      "Target": "xpath=//div[2]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
       "Value": "",
-      "Description": "End of the job card processing loop"
+      "Description": ""
     },
     {
-      "Command": "label",
-      "Target": "nextpage",
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
       "Value": "",
-      "Description": "Mark the start of the pagination routine"
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
     },
     {
       "Command": "store",
-      "Target": "false",
-      "Value": "!errorignore",
-      "Description": "Disable error ignoring so the macro halts if there is no Next button"
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
     },
     {
-      "Command": "onError",
-      "Target": "#goto",
-      "Value": "end",
-      "Description": "If clicking the Next button fails (last page), jump to the end of the macro"
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[3]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[4]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[5]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[6]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div/p/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[7]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[8]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[9]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[10]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[11]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[12]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[13]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[14]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[15]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[16]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[17]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[18]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[19]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[20]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[21]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[22]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[23]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[24]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[25]/div/div/div/div/div/div/div/div/div/div/p/span[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "css=button[data-testid=expandable-text-button]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div[2]",
+      "Value": "Title",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[self::main or @role='main']//a[contains(@href, '/jobs/view/')][1]@href",
+      "Value": "URL",
+      "Description": "Reads the selected job hyperlink from the detail area"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div",
+      "Value": "Company",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div[2]/div/a/span",
+      "Value": "Pay",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"workspace\"]/div/div[2]/div/div[2]/div/div[2]/div/div/div",
+      "Value": "jobDetails",
+      "Description": "Scrape the full visible job details."
+    },
+    {
+      "Command": "store",
+      "Target": "30",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${Title} | ${Pay} | ${Company} | ${URL}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Title}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Company}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${Pay}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${URL}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jobDetails}",
+      "Value": "!csvLine",
+      "Description": "Prepare the enriched CSV row."
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jobs-LinkedIn-URLs",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//strong",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//div[2]/div/button[2]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//div[3]/div/button/span",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "!errorignore",
+      "Value": "false",
+      "Description": ""
     },
     {
       "Command": "click",
       "Target": "xpath=//button[@data-testid='pagination-controls-next-button-visible']",
       "Value": "",
-      "Description": "Click the pagination 'Next' button"
+      "Description": "Clicks the Next button avoiding XPath"
     },
     {
       "Command": "store",
-      "Target": "true",
-      "Value": "!errorignore",
-      "Description": "Re-enable error ignoring for the next page's loop"
+      "Target": "!errorignore",
+      "Value": "true",
+      "Description": ""
     },
     {
       "Command": "pause",
-      "Target": "3000",
+      "Target": "5000",
       "Value": "",
-      "Description": "Wait 3 seconds for the new page of results to load"
+      "Description": ""
     },
     {
       "Command": "gotoLabel",
       "Target": "Start",
       "Value": "",
-      "Description": "Jump back to the 'Start' label to process the new page"
-    },
-    {
-      "Command": "label",
-      "Target": "end",
-      "Value": "",
-      "Description": "Mark the successful termination point of the macro"
+      "Description": ""
     }
   ]
 }
