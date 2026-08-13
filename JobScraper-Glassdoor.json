@@ -1,11 +1,11 @@
 {
   "Name": "Job Scraper - Glassdoor",
-  "CreationDate": "2026-8-12",
+  "CreationDate": "2026-8-13",
   "Commands": [
     {
       "Command": "selectWindow",
       "Target": "tab=open",
-      "Value": "https://www.glassdoor.com/Job/jobs.htm?locId=1&locT=N&sc.locationSeoString=United+States&sc.occupationParam=%28M365+OR+Microsoft+365+OR+Microsoft+Teams+OR+SharePoint%29&maxSalary=600000&minSalary=130000&remoteWorkType=1",
+      "Value": "https://www.glassdoor.com/Job/united-states-sharepoint-jobs-SRCH_IL.0,13_IN1_KO14,24.htm?maxSalary=600000&minSalary=130000",
       "Description": ""
     },
     {
