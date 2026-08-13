@@ -4,7 +4,7 @@
   "Commands": [
     {
       "Command": "store",
-      "Target": "true",
+      "Target": "false",
       "Value": "!errorignore",
       "Description": "Enable error ignoring so the macro continues even if elements are missing"
     },
@@ -28,7 +28,7 @@
     },
     {
       "Command": "while_v2",
-      "Target": "${i} <= 26",
+      "Target": "${i} <= 25",
       "Value": "",
       "Description": "Start loop to process up to 30 job cards on the current page"
     },
