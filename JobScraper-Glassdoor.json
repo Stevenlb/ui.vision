@@ -1,6 +1,6 @@
 {
   "Name": "Job Scraper - Glassdoor",
-  "CreationDate": "2026-8-13",
+  "CreationDate": "2026-01-15",
   "Commands": [
     {
       "Command": "selectWindow",
